@@ -27,23 +27,37 @@ spring:
         predicates:
         - Path=/163/**
 #        请求转发前的filter，为一个数组。
-#        filters:
-#        - StripPrefix=1
+        filters:
+        - StripPrefix=1
+#      ------------------------------------------------------------------
+      - id: hello
+        uri: http://localhost:8088/
+        predicates:
+        - Path=/api-a/**
+        filters:
+#          去掉前面一个前缀后转发到对应的uri，也就是去掉/api-a，StripPrefix=2则去掉2个前缀
+        - StripPrefix=1
+#      ------------------------------------------------------------------
+      - id: hello2
+        uri: http://localhost:8087/
+        predicates:
+        - Path=/api-b/**
+        filters:
+        - StripPrefix=1
 #      ------------------------------------------------------------------
       - id: baidu
         uri: http://www.baidu.com/
         predicates:
         - Path=/baidu/**
+        filters:
+        - StripPrefix=1
 #      ------------------------------------------------------------------
       - id: taobao
         uri: http://www.taobao.com/
         predicates:
         - Path=/taobao/**
-#      ------------------------------------------------------------------
-      - id: hello
-        uri: http://localhost:8087/hello/feign
-        predicates:
-        - Path=/hello/**
+        filters:
+        - StripPrefix=1
 #      ------------------------------------------------------------------
 
 eureka:
