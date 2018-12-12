@@ -1,4 +1,4 @@
-package com.springcloud.demo.servicezuul;
+package com.service.zuul;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

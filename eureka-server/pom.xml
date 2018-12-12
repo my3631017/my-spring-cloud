@@ -83,7 +83,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <!-- 指定该Main Class为全局的唯一入口 -->
-                    <mainClass>com.eurekaserver.EurekaServerApplication</mainClass>
+                    <mainClass>com.eureka.server.EurekaServerApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

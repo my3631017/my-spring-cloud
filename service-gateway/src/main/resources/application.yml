@@ -16,25 +16,20 @@ spring:
 #          默认为false，设为true便开启通过服务中心的自动根据 serviceId 创建路由的功能。
 #          路由访问方式：http://Gateway_HOST:Gateway_PORT/大写的serviceId/**，其中微服务应用名默认大写访问。
           enabled: false
-#      具体的路由信息，是一个数组,每个路由基本包含id、uri、predicates和filters等
+#      具体的路由信息，是一个数组,每个路由基本包含id、uri、predicates和filters等，配置见springCloud官网
       routes:
 #      ------------------------------------------------------------------
-#        这个路由的唯一id，不定义的话为一个uuid
-      - id: 163
+#        这个路由的唯一id，不定义的话默认为一个uuid
+      - id: hello
 #        http请求为lb(load balancing负载均衡)://前缀 + 服务id；ws请求为lb:ws://前缀 + 服务id；表示将请求负载到哪一个服务上
-        uri: http://www.163.com/
+        uri: http://localhost:8088/
 #        这个路由的请求匹配规则，只有符合这个规则的请求才会走这个路由。为一个数组，每个规则为并且的关系
         predicates:
-        - Path=/163/**
-#        请求转发前的filter，为一个数组。
-        filters:
-        - StripPrefix=1
-#      ------------------------------------------------------------------
-      - id: hello
-        uri: http://localhost:8088/
-        predicates:
         - Path=/api-a/**
+#        请求转发前的filter，为一个数组
         filters:
+#          增加一个/path的前缀，如原来请求路径是/hello，现在变成/path/hello
+#        - PrefixPath=/path
 #          去掉前面一个前缀后转发到对应的uri，也就是去掉/api-a，StripPrefix=2则去掉2个前缀
         - StripPrefix=1
 #      ------------------------------------------------------------------
@@ -42,6 +37,13 @@ spring:
         uri: http://localhost:8087/
         predicates:
         - Path=/api-b/**
+        filters:
+        - StripPrefix=1
+#      ------------------------------------------------------------------
+      - id: 163
+        uri: http://www.163.com/
+        predicates:
+        - Path=/163/**
         filters:
         - StripPrefix=1
 #      ------------------------------------------------------------------
@@ -58,6 +60,24 @@ spring:
         - Path=/taobao/**
         filters:
         - StripPrefix=1
+#      ------------------------------------------------------------------
+      - id: AddRequestParameter
+        uri: http://localhost:8088/
+        predicates:
+        - Path=/myfilter/**
+        filters:
+        - StripPrefix=1
+        - AddRequestParameter=add,wozuishuai
+#      ------------------------------------------------------------------
+#      - id: getBody
+#        uri: http://localhost:8088/
+#        predicates:
+#        - Path=/filter/**
+#        - ReadBody=class java.lang.Object,true
+#        filters:
+#        - StripPrefix=1
+##        开启PreGatewayFilterFactory过滤器
+#        - AddRequestParameter=birth,19930311
 #      ------------------------------------------------------------------
 
 eureka:

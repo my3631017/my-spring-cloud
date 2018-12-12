@@ -1,4 +1,4 @@
-package com.springcloud.demo.servicegateway;
+package com.service.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,8 +12,8 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @EnableEurekaClient
 public class ServiceGatewayApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ServiceGatewayApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceGatewayApplication.class, args);
+    }
 
 }
