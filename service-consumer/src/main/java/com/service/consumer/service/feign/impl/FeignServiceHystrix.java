@@ -14,6 +14,6 @@ import org.springframework.stereotype.Component;
 public class FeignServiceHystrix implements FeignService {
     @Override
     public String hello(String name) {
-        return "sorry " + name + "，service has fail!";
+        return "远程调用失败 " + name + "，service has fail!";
     }
 }

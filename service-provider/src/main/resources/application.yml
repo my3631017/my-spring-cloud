@@ -4,6 +4,22 @@ server:
 spring:
   application:
     name: service-provider
+  kafka:
+    bootstrap-servers: 47.106.176.177:9092
+    consumer:
+      group-id: defaultGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+kafka:
+  topic: mine.kafka
 
 eureka:
 #  更改Eureka更新频率将打破服务器的自我保护功能，生产环境下不建议自定义这些配置。
